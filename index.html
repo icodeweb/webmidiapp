@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>howler</title>
+    <style>
+        div {
+            display: flex;
+            gap: 1rem
+        }
+
+        .sounds {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            width: fit-content;
+
+            button {
+                border-radius: 50%;
+            }
+        }
+
+        body {
+            display: flex;
+            gap: 3rem;
+            background-color: blue;
+            flex-direction: column;
+            color: white;
+            font-size: 20px;
+            font-family: monospace;
+            padding: 3rem;
+        }
+
+        button {
+            background-color: black;
+            color: yellow;
+            width: 60px;
+            height: 60px;
+        }
+    </style>
+</head>
+
+<body>
+    <span>sounds</span>
+    <div class="sounds"></div>
+    <br>
+    <div class="packs">packs </div>
+    <script src="https://cdn.jsdelivr.net/npm/webmidi@latest/dist/iife/webmidi.iife.js"></script>
+    <script src="/node_modules/howler/dist/howler.js"></script>
+    <script>
+        const sounds = [];
+        const packs = [];
+        Howler.autoUnlock = false;
+        function loadPack(packNum) {
+            for (let index = 1; index <= 12; index++) {
+                sounds[index] = new Howl({
+                    src: [`/sounds/${packNum}/${index}.mp3`],
+                    volume: 0.5
+                });
+            }
+        }
+        function playSound(number) {
+            sounds[number].play();
+        }
+        loadPack(1)
+
+        for (let i = 1; i < sounds.length; i++) {
+            const sound = sounds[i];
+            document.querySelector(".sounds").innerHTML += `<button class="sound" onclick="playSound(${i})">${i}</button>`
+        }
+
+        let soundElemnts = document.querySelectorAll(".sound");
+        let packElemnts = document.querySelectorAll(".pack");
+
+        for (let i = 1; i < 18; i++) {
+            document.querySelector(".packs").innerHTML += `
+            <div><button class="pack" onclick="loadPack(${i})">${i}</button></div>`
+        }
+
+        // var id1 = sound.play();
+        // sound.rate(.5, id1);
+        // sound.fade(1, 0, 2000, id1);
+
+        let numberKeyslist = [49, 50, 51, 52, 53, 54, 55, 56, 57, 58] //keyboard key codes
+        document.addEventListener("keydown", (e) => {
+            if (numberKeyslist.includes(e.keyCode)) {
+                // sounds.forEach(sound => { sound.stop() }) //stops all sounds when any trigger
+                sounds[e.key].stop()
+                playSound(e.key)
+                soundElemnts[Number(e.key) - 1].style.backgroundColor = "red"
+                setTimeout(() => {
+                    soundElemnts[Number(e.key) - 1].style.backgroundColor = "black"
+                }, 100)
+            }
+        })
+        const MIDInotes = {
+            45: 1,
+            46: 2,
+            47: 3,
+            42: 4,
+            43: 5,
+            44: 6,
+            39: 7,
+            40: 8,
+            41: 9,
+            36: 10,
+            37: 11,
+            38: 12,
+        };
+
+        const MIDItoggles = {
+            48: 1,
+            49: 2,
+            50: 3,
+            51: 4,
+            52: 5,
+            53: 6,
+            54: 7,
+            55: 8,
+            56: 9,
+            57: 10,
+            58: 11,
+        };
+
+        const MIDItcc = {
+            7: 1,
+            20: 2,
+            21: 3,
+            22: 4,
+            23: 5,
+        };
+        function classifyMidiMessage(MIDInoteCode) {
+            if (MIDInotes[MIDInoteCode]) return "MIDInotes";
+            if (MIDItoggles[MIDInoteCode]) return "MIDItoggles";
+            // if (MIDItcc[MIDInoteCode]) return "MIDItcc";
+            return null;
+        }
+
+        let noOverLap = false;
+
+        WebMidi.enable().then(onEnabled).catch(err => alert(err));
+
+        function onEnabled() {
+            if (
+                WebMidi.inputs.length > 0
+                &&
+                WebMidi.inputs.some(obj => obj.manufacturer === "LeafLabs")) {
+                WebMidi.inputs[0].addListener("noteon", e => {
+                    if (classifyMidiMessage(e.note.number) == "MIDInotes") {
+                        if (noOverLap) sounds[MIDInotes[e.note.number]].stop();
+                        playSound(MIDInotes[e.note.number]);
+                        soundElemnts[MIDInotes[e.note.number] - 1].style.backgroundColor = "red"
+                        setTimeout(() => {
+                            soundElemnts[MIDInotes[e.note.number] - 1].style.backgroundColor = "black"
+                        }, 100)
+                    } else {
+                        // toggels
+                    }
+                });
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>
