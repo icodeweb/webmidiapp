@@ -11,14 +11,46 @@
             gap: 1rem
         }
 
+        .app {
+            display: flex;
+            gap: 3rem;
+        }
+
         .sounds {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
             width: fit-content;
 
             button {
-                border-radius: 50%;
+                /* border-radius: 50%; */
             }
+        }
+
+        .toggles,
+        .packs {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            width: fit-content;
+
+            button {
+                /* border-radius: 50%; */
+                font-size: 12px;
+            }
+        }
+
+        .sounds {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            width: fit-content;
+
+            button {
+                /* border-radius: 50%; */
+                font-size: 20px;
+            }
+        }
+
+        .controls {
+            display: block;
         }
 
         body {
@@ -38,19 +70,98 @@
             width: 60px;
             height: 60px;
         }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(16, 30px);
+            grid-template-rows: repeat(12, 30px);
+            gap: 4px;
+        }
+
+        .grid button {
+            width: 30px;
+            height: 30px;
+            background-color: #111;
+            border: 1px solid #333;
+        }
+
+        .grid button.active {
+            background-color: yellow;
+        }
+
+        .grid button.playhead {
+            border-color: red;
+        }
     </style>
 </head>
 
 <body>
-    <span>sounds</span>
-    <div class="sounds"></div>
-    <br>
-    <div class="packs">packs </div>
+    undefined.devices
+    <div class="app">
+        <div class="soundsDIV">
+            <span>sounds</span>
+            <div class="sounds"></div>
+        </div>
+        <div class="togglesDIV">
+            <span>toggles</span>
+            <div class="toggles"></div>
+        </div>
+        <div class="packsDIV">
+            <span>packs</span>
+            <div class="packs"></div>
+        </div>
+        <div class="controlsDIV">
+            <span>controls</span>
+            <div class="controls"></div>
+        </div>
+    </div>
+    <div class="gridDIV">
+        <span>sequencer</span>
+        <div class="grid"></div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/webmidi@latest/dist/iife/webmidi.iife.js"></script>
     <script src="/node_modules/howler/dist/howler.js"></script>
     <script>
+
         const sounds = [];
         const packs = [];
+        const controls = [];
+        const MIDInotes = {
+            45: 1,
+            46: 2,
+            47: 3,
+            42: 4,
+            43: 5,
+            44: 6,
+            39: 7,
+            40: 8,
+            41: 9,
+            36: 10,
+            37: 11,
+            38: 12,
+        };
+
+        const MIDItoggles = {
+            48: [1, "play"],
+            49: [2, "rec"],
+            50: [3, "overdrive"],
+            51: [4, "filter"],
+            52: [5, "echo"],
+            53: [6, "reverb"],
+            54: [7, "fx off"],
+            55: [8, "tracks"],
+            56: [9, "tracks on"],
+            57: [10, "cutoff"],
+            58: [11, "track length"],
+        };
+
+        const MIDItcc = {
+            7: 1,
+            20: 2,
+            21: 3,
+            22: 4,
+            23: 5,
+        };
         Howler.autoUnlock = false;
         function loadPack(packNum) {
             for (let index = 1; index <= 12; index++) {
@@ -64,16 +175,27 @@
             sounds[number].play();
         }
         loadPack(1)
+        function toggle(param) { }
 
         for (let i = 1; i < sounds.length; i++) {
             const sound = sounds[i];
             document.querySelector(".sounds").innerHTML += `<button class="sound" onclick="playSound(${i})">${i}</button>`
         }
 
-        let soundElemnts = document.querySelectorAll(".sound");
-        let packElemnts = document.querySelectorAll(".pack");
+        for (let i = 48; i < 59; i++) {
+            document.querySelector(".toggles").innerHTML += `<button class="toggle" onclick="toggle(${i})">${MIDItoggles[i][1]}</button>`
+        }
 
-        for (let i = 1; i < 18; i++) {
+        for (let i = 1; i < 6; i++) {
+            document.querySelector(".controls").innerHTML += `<span>cc${i}</span><span class="control">0</span><br>`
+        }
+
+        let soundElemnts = document.querySelectorAll(".sound");
+        let controlElemnts = document.querySelectorAll(".control");
+        let packElemnts = document.querySelectorAll(".pack");
+        let toggleElemnts = document.querySelectorAll(".toggle");
+
+        for (let i = 1; i < 19; i++) {
             document.querySelector(".packs").innerHTML += `
             <div><button class="pack" onclick="loadPack(${i})">${i}</button></div>`
         }
@@ -94,46 +216,9 @@
                 }, 100)
             }
         })
-        const MIDInotes = {
-            45: 1,
-            46: 2,
-            47: 3,
-            42: 4,
-            43: 5,
-            44: 6,
-            39: 7,
-            40: 8,
-            41: 9,
-            36: 10,
-            37: 11,
-            38: 12,
-        };
-
-        const MIDItoggles = {
-            48: 1,
-            49: 2,
-            50: 3,
-            51: 4,
-            52: 5,
-            53: 6,
-            54: 7,
-            55: 8,
-            56: 9,
-            57: 10,
-            58: 11,
-        };
-
-        const MIDItcc = {
-            7: 1,
-            20: 2,
-            21: 3,
-            22: 4,
-            23: 5,
-        };
         function classifyMidiMessage(MIDInoteCode) {
             if (MIDInotes[MIDInoteCode]) return "MIDInotes";
             if (MIDItoggles[MIDInoteCode]) return "MIDItoggles";
-            // if (MIDItcc[MIDInoteCode]) return "MIDItcc";
             return null;
         }
 
@@ -142,12 +227,12 @@
         WebMidi.enable().then(onEnabled).catch(err => alert(err));
 
         function onEnabled() {
-            if (
-                WebMidi.inputs.length > 0
-                &&
-                WebMidi.inputs.some(obj => obj.manufacturer === "LeafLabs")) {
+            const myInput = WebMidi.getInputByName("HOLOMATE.MIDI");
+            if (myInput) {
+                // noteon
                 WebMidi.inputs[0].addListener("noteon", e => {
                     if (classifyMidiMessage(e.note.number) == "MIDInotes") {
+                        // MIDInotes
                         if (noOverLap) sounds[MIDInotes[e.note.number]].stop();
                         playSound(MIDInotes[e.note.number]);
                         soundElemnts[MIDInotes[e.note.number] - 1].style.backgroundColor = "red"
@@ -155,12 +240,80 @@
                             soundElemnts[MIDInotes[e.note.number] - 1].style.backgroundColor = "black"
                         }, 100)
                     } else {
-                        // toggels
+                        // MIDItoggles
+                        toggleElemnts[MIDItoggles[e.note.number - 1][0]].style.backgroundColor = "red";
+                        setTimeout(() => {
+                            toggleElemnts[MIDItoggles[e.note.number - 1][0]].style.backgroundColor = "black";
+                        }, 100)
                     }
                 });
+                // controlchange
+                WebMidi.inputs[0].addListener("controlchange", e => {
+                    console.log("cc:", e.controller.number, "control:", MIDItcc[e.controller.number], "vlaue", e.rawValue);
+                    controlElemnts[MIDItcc[e.controller.number] - 1].innerHTML = `${e.rawValue}`
+                }, { channels: [1, 2, 3] });
             }
         }
 
+        const grid = Array.from({ length: 12 }, () => Array(16).fill(false));
+        const trackLengths = Array(12).fill(16);
+        const gridContainer = document.querySelector('.grid');
+        let recordMode = false;
+
+        // build grid buttons
+        for (let row = 0; row < 12; row++) {
+            for (let col = 0; col < 16; col++) {
+                const btn = document.createElement('button');
+                btn.dataset.row = row;
+                btn.dataset.col = col;
+                btn.onclick = () => {
+                    grid[row][col] = !grid[row][col];
+                    btn.classList.toggle('active', grid[row][col]);
+                };
+                gridContainer.appendChild(btn);
+            }
+        }
+
+        let bpm = 290;
+        let playhead = 0;
+
+        // --- simple sequencer (replaced beet.js) ---
+        let intervalId = null;
+        function tick() {
+            const col = playhead % 16;
+            const buttons = document.querySelectorAll('.grid button');
+            buttons.forEach(btn => btn.classList.remove('playhead'));
+
+            for (let row = 0; row < 12; row++) {
+                const idx = row * 16 + col;
+                buttons[idx].classList.add('playhead');
+                if (grid[row][col]) playSound(row + 1);
+            }
+
+            playhead = (playhead + 1) % 16;
+        }
+
+        function startSequencer() {
+            playhead = 0;
+            const intervalMs = (60 / bpm) / 4 * 1000; // 16th notes
+            if (intervalId) clearInterval(intervalId);
+            intervalId = setInterval(tick, intervalMs);
+            // run first tick immediately so UI updates on start
+            tick();
+        }
+
+        function stopSequencer() {
+            if (intervalId) {
+                clearInterval(intervalId);
+                intervalId = null;
+            }
+        }
+
+        // temp key controls
+        document.addEventListener('keydown', e => {
+            if (e.key === 'p') startSequencer();
+            if (e.key === 's') stopSequencer();
+        });
 
     </script>
 </body>
