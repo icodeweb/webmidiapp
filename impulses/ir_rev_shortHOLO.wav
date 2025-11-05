@@ -1,0 +1,37 @@
+<!DOCTYPE html><html lang="es"><head>
+    <meta charset="utf-8">
+    <title>Holomate Play</title>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="assets/favicon/site.webmanifest">
+    <link rel="mask-icon" href="assets/favicon/safari-pinned-tab.svg" color="#000000">
+    <meta name="msapplication-TileColor" content="#000000">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="canonical" href="https://play.holomate.cc">
+    <meta property="og:type" content="website">
+    <meta name="apple-mobile-web-app-title" content="Holomate Play">
+    <meta property="og:site_name" content="Holomate Play">
+    <meta property="og:title" content="Holomate Play">
+    <meta name="twitter:title" content="Holomate Play">
+    <meta property="og:image:alt" content="explorá un sinfín de posibilidades y creá ritmos únicos con Holomate play">
+    <meta name="description" property="og:description" content="explorá un sinfín de posibilidades y creá ritmos únicos con Holomate play">
+    <meta name="twitter:description" content="explorá un sinfín de posibilidades y creá ritmos únicos con Holomate play">
+    <meta property="og:image" content="https://www.holomate.cc/logo.png">
+    <meta name="twitter:image:src" content="https://www.holomate.cc/logo.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <!-- /SEO -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="og:description" content="explorá un sinfín de posibilidades y creá ritmos únicos con Holomate play">
+    <meta property="og:url" content="https://play.holomate.cc/">
+    <meta property="twitter:image" content="https://www.holomate.cc/logo.png">
+  <style>:root{--holo-black:#191919;--holo-dark:#465059;--holo-gray-dark:#8D9BAA;--holo-gray-light:#DBE4E9;--holo-white:#F5F5F5;--holo-blue:#1F73F3;--holo-orange:#FF601C;--holo-red:#D62F4D;--holo-light-blue:#7AAFFF;--row-height:47px;--global-spacer:10px;--btn-size:45px;--border-radius:6px;--font-size:16px;--column-size:376px;--sequencer-color-active:var(--holo-blue);--track-mode-color:var(--holo-blue);--volume-mode-color:var(--holo-blue)}body,html{height:100%;overscroll-behavior:none}*{touch-action:manipulation}@font-face{font-family:Milimetre;src:url(Millimetre-Regular_web.0e7d933fc3594e91.woff) format("woff")}body{scroll-behavior:smooth;text-rendering:optimizeSpeed;line-height:1.5;font-size:var(--font-size);background-color:var(--main-bg-color);color:var(--font-color);font-family:Milimetre,sans-serif;-webkit-user-select:none;user-select:none}@media (prefers-color-scheme: dark){body{--main-bg-color:var(--holo-black);--border-color:var(--holo-dark);--module-bg-color:var(--holo-black);--btn-bg-color:#202020;--btn-bg-color--muted:#7c7c7c;--btn-bg-color--selected:var(--holo-blue);--btn-font-color:var(--holo-gray-dark);--font-color:var(--holo-gray-light);--border-knob-color:var(--main-bg-color);--slider-track-color:var(--holo-gray-dark);--slider-knob-color:var(--holo-gray-dark);--sequencer-color-off:var(--holo-dark);--sequencer-color-on:var(--holo-gray-light);--button-active:#202020;--sequencer-color-disabled:#090909;--button-toggle-color:#090909;--btn-bg-color--active:var(--holo-gray-light);--filter-color:var(--holo-gray-light);--active-color:var(--holo-blue);--holo-yellow:#d6cd0c}}@media (prefers-color-scheme: light){body{--main-bg-color:var(--holo-white);--module-bg-color:var(--holo-white);--border-color:var(--holo-gray-dark);--btn-bg-color:var(--holo-gray-light);--btn-bg-color--selected:var(--holo-gray-dark);--btn-bg-color--active:var(--holo-gray-dark);--btn-font-color:var(--holo-gray-dark);--font-color:var(--holo-dark);--border-knob-color:var(--main-bg-color);--active-color:var(--holo-blue);--slider-track-color:var(--border-color);--slider-knob-color:var(--border-color);--sequencer-color-off:var(--holo-gray-light);--sequencer-color-on:var(--holo-dark);--button-active:var(--holo-gray-light);--sequencer-color-disabled:var(--holo-gray-light);--button-toggle-color:var(--holo-gray-light);--filter-color:var(--holo-dark);--holo-yellow:#efa516}}*{transition-property:background-color,color;transition-duration:10ms;transition-timing-function:ease-in-out}*,*:before,*:after{box-sizing:border-box}body{margin:0}@media (prefers-reduced-motion: reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}</style><link rel="stylesheet" href="styles.d87959351d124074.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="styles.d87959351d124074.css"></noscript></head>
+  <body>
+    <app-root></app-root>
+  <script src="runtime.5819647af7642d9c.js" type="module"></script><script src="polyfills.2919b86f3fee0550.js" type="module"></script><script src="main.8e43c7dec74c26db.js" type="module"></script>
+
+</body></html>
