@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/skin.css">
-    <link rel="stylesheet" href="/css/mediaControls.css">
+    <link rel="stylesheet" href="./css/mediaControls.css">
+    <link rel="stylesheet" href="./css/skin.css">
 </head>
 
 <body>
@@ -31,24 +31,27 @@
                     <div id="mainToggles"></div>
                     <div id="bpmControl">
                         <button id="tapTempo">tap</button>
-                        <input id="bpmDisplay" type="number" value="50" min="40" max="240">
+                        <input id="bpmInput" type="number" value="50" min="40" max="240">
                     </div>
                 </div>
                 <div id="visualiser"></div>
-                <audio controls></audio>
+                <audio controls id="OutputPlayer"></audio>
             </div>
             <div id="right">
                 <div id="fxboard">
                     <span id="FXchainSpan"></span>
+                    <button id="fxOffButton">fx off</button>
                 </div>
                 <div id="fxControls"></div>
             </div>
         </div>
     </div>
-    <script src="/js/webmidi.iife.js"></script>
-    <script src="/node_modules/howler/dist/howler.js"></script>
-    <script src="/node_modules/tunajs/tuna-min.js"></script>
-    <script src="/js/app.js"></script>
+    <script src="./js/webmidi.iife.js"></script>
+    <script src="./js/howler.js"></script>
+    <script src="./js/tuna-min.js"></script>
+    <script src="./js/app.js"></script>
+    <!-- <script src="/node_modules/howler/dist/howler.js"></script> -->
+    <!-- <script src="/node_modules/tunajs/tuna-min.js"></script> -->
 </body>
 
 </html>

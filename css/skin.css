@@ -82,7 +82,7 @@ body {
     }
 }
 
-.grid {
+.sequencerGrid {
     display: flex;
     flex-direction: column;
     width: fit-content;
@@ -171,6 +171,8 @@ body {
     }
 }
 
+
+
 #samplesAndMaincontrols {
     display: flex;
     border: .8px rgb(156, 156, 156) solid;
@@ -197,7 +199,7 @@ body {
     border: none;
     border-radius: 50%;
     background-color: #202020;
-    color: white;
+    color: #8D9BAA;
     font-size: 20px;
     height: 45px;
     width: 45px;
@@ -335,7 +337,7 @@ body {
 }
 
 .selectedSound {
-    background-color: #3d3d3d !important;
+    color: #1F73F3;
 }
 
 
@@ -344,5 +346,10 @@ body {
 }
 
 .paramsContainer {
+    display: none;
+}
+
+
+#OutputPlayer {
     display: none;
 }
